@@ -90,7 +90,8 @@ async def on_ready():
     if not rvdia.synced:
       synced_commands = await rvdia.tree.sync() # Global slash commands sync, also returns a list of commands.
       await asyncio.sleep(1.5) # Avoid rate limit
-      await rvdia.tree.sync(guild=discord.Object(997500206511833128)) # Wonder if it fixes with this??
+      guild_id = os.getenv('GUILD_ID')  # Ambil ID guild dari .envawait rvdia.tree.sync(guild=discord.Object(guild_id)) # Wonder if it fixes with this??
+      await rvdia.tree.sync(guild=discord.Object(guild_id))
       rvdia.synced = [True, len(synced_commands)]
       logging.info('Slash Commands synced to global!')
 
